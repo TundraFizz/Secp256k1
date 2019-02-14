@@ -22,6 +22,6 @@ cd secp256k1
 make
 ./tests
 
-I'd rather use the static .a library that run "install"
+I'd rather use the static .a library then run "install"
 sudo make install
 ```
