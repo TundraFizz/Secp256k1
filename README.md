@@ -1,5 +1,15 @@
 # Secp256k1
 
+#### Use the precompiled library
+
+```
+g++ -std=c++11 -O3 -s main.cpp -L. -l secp256k1.a -o main
+./main
+valgrind --leak-check=yes --quiet ./main
+```
+
+#### Other stuff
+
 ```
 sudo yum -y install git gcc-c++
 git clone https://github.com/TundraFizz/Secp256k1
