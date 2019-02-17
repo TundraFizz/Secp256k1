@@ -1,37 +1,17 @@
 # Secp256k1
 
-#### Use the precompiled library
+Getting started
 
 ```
-g++ -std=c++11 -O3 -s main.cpp -L. -l secp256k1.a -o main
-./main
-valgrind --leak-check=yes --quiet ./main
-```
-
-#### Other stuff
-
-```
-sudo yum -y install git gcc-c++
+sudo yum -y install git gcc gcc-c++
 git clone https://github.com/TundraFizz/Secp256k1
 cd Secp256k1
-g++ -std=c++11 -O3 -s main.cpp -L . -l :libsecp256k1.a -o main
-./main
 ```
 
-#### Todo: Build it yourself
+Build and/or compile and test by performing one of these commands
 
-Here's some commands that will help
-
-```
-sudo yum -y install git gcc gcc-c++ libtool
-sudo yum -y install automake
-git clone https://github.com/bitcoin-core/secp256k1
-cd secp256k1
-./autogen.sh
-./configure
-make
-./tests
-
-I'd rather use the static .a library then run "install"
-sudo make install
-```
+| Command                   | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `make -C lib precompiled` | Build the library from scratch and test it    |
+| `make -C lib build`       | TODO: Not implemented yet                     |
+| `make -C lib`             | Currently only does the `precompiled`` option |
