@@ -678,9 +678,10 @@ char* Wrapper(const uint8_t* privateKey){
   // Create an uncompressed public key that's 64 bytes long
   secp256k1_ec_pubkey_serialize(ctx, pubkey_serialized, &pubkeylen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
 
-  char* qwe = new char[129];
+  // Start at index 1 because the constant 0x04 prefix needs to be skipped
+  char* publicKey = new char[129];
   snprintf(
-    qwe, 129,
+    publicKey, 129,
     "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
     pubkey_serialized[1],  pubkey_serialized[2],  pubkey_serialized[3],  pubkey_serialized[4],  pubkey_serialized[5],  pubkey_serialized[6],  pubkey_serialized[7],  pubkey_serialized[8],
     pubkey_serialized[9],  pubkey_serialized[10], pubkey_serialized[11], pubkey_serialized[12], pubkey_serialized[13], pubkey_serialized[14], pubkey_serialized[15], pubkey_serialized[16],
@@ -693,7 +694,7 @@ char* Wrapper(const uint8_t* privateKey){
     );
 
   secp256k1_context_destroy(ctx);
-  return qwe;
+  return publicKey;
 }
 
 #endif
