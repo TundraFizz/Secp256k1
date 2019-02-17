@@ -14,4 +14,4 @@ Build and/or compile and test by performing one of these commands
 | ------------------------- | --------------------------------------------- |
 | `make -C lib precompiled` | Build the library from scratch and test it    |
 | `make -C lib build`       | TODO: Not implemented yet                     |
-| `make -C lib`             | Currently only does the `precompiled`` option |
+| `make -C lib`             | Currently only does the `precompiled`  option |
