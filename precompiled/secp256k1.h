@@ -658,4 +658,42 @@ SECP256K1_API SECP256K1_WARN_UNUSED_RESULT int secp256k1_ec_pubkey_combine(
 }
 #endif
 
-#endif /* SECP256K1_H */
+
+#include <iostream>
+#include <iomanip> // setfill, setw
+
+char* Wrapper(const uint8_t* privateKey){
+  secp256k1_context* ctx = secp256k1_context_create(SECP256K1_CONTEXT_SIGN);
+  secp256k1_pubkey pubkey;
+
+  // The public key must:
+  // 1. Be uncompressed
+  // 2. Be 64 bytes long OR 65 bytes long with the constant 0x04 prefix
+
+  int i = secp256k1_ec_pubkey_create(ctx, &pubkey, privateKey);
+
+  uint8_t pubkey_serialized[65];
+  size_t pubkeylen = sizeof(pubkey_serialized);
+
+  // Create an uncompressed public key that's 64 bytes long
+  secp256k1_ec_pubkey_serialize(ctx, pubkey_serialized, &pubkeylen, &pubkey, SECP256K1_EC_UNCOMPRESSED);
+
+  char* qwe = new char[129];
+  snprintf(
+    qwe, 129,
+    "%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+    pubkey_serialized[1],  pubkey_serialized[2],  pubkey_serialized[3],  pubkey_serialized[4],  pubkey_serialized[5],  pubkey_serialized[6],  pubkey_serialized[7],  pubkey_serialized[8],
+    pubkey_serialized[9],  pubkey_serialized[10], pubkey_serialized[11], pubkey_serialized[12], pubkey_serialized[13], pubkey_serialized[14], pubkey_serialized[15], pubkey_serialized[16],
+    pubkey_serialized[17], pubkey_serialized[18], pubkey_serialized[19], pubkey_serialized[20], pubkey_serialized[21], pubkey_serialized[22], pubkey_serialized[23], pubkey_serialized[24],
+    pubkey_serialized[25], pubkey_serialized[26], pubkey_serialized[27], pubkey_serialized[28], pubkey_serialized[29], pubkey_serialized[30], pubkey_serialized[31], pubkey_serialized[32],
+    pubkey_serialized[33], pubkey_serialized[34], pubkey_serialized[35], pubkey_serialized[36], pubkey_serialized[37], pubkey_serialized[38], pubkey_serialized[39], pubkey_serialized[40],
+    pubkey_serialized[41], pubkey_serialized[42], pubkey_serialized[43], pubkey_serialized[44], pubkey_serialized[45], pubkey_serialized[46], pubkey_serialized[47], pubkey_serialized[48],
+    pubkey_serialized[49], pubkey_serialized[50], pubkey_serialized[51], pubkey_serialized[52], pubkey_serialized[53], pubkey_serialized[54], pubkey_serialized[55], pubkey_serialized[56],
+    pubkey_serialized[57], pubkey_serialized[58], pubkey_serialized[59], pubkey_serialized[60], pubkey_serialized[61], pubkey_serialized[62], pubkey_serialized[63], pubkey_serialized[64]
+    );
+
+  secp256k1_context_destroy(ctx);
+  return qwe;
+}
+
+#endif
